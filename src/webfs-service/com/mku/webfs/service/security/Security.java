@@ -73,8 +73,6 @@ public class Security {
 
         http.authorizeRequests()
                 .antMatchers("/**")
-                .permitAll()
-                .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic()
