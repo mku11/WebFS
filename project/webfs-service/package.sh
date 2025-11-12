@@ -2,7 +2,7 @@
 WEBFS_VERSION=1.0.0
 
 CURRDIR=$(pwd)
-JAVA_WS=java-ws
+APP_NAME=webfs-service
 WS_APP_PROPERTIES=./config/application.properties
 WS_SCRIPT_SH=./scripts/start-webfs-service.sh
 WS_SCRIPT_BAT=./scripts/start-webfs-service.bat
@@ -11,9 +11,9 @@ WS_WAR_NAME=webfs-service.war
 
 CONFIG_DIR=config
 OUTPUT_ROOT=../../output
-WS_OUTPUT_DIR=$OUTPUT_ROOT/$JAVA_WS
-WS_PACKAGE_NAME=$JAVA_WS.$WEBFS_VERSION
-WS_PACKAGE_NAME_ZIP=$JAVA_WS.$WEBFS_VERSION.zip
+WS_OUTPUT_DIR=$OUTPUT_ROOT/$APP_NAME
+WS_PACKAGE_NAME=$APP_NAME-$WEBFS_VERSION
+WS_PACKAGE_NAME_ZIP=$APP_NAME-$WEBFS_VERSION.zip
 
 mkdir -p $WS_OUTPUT_DIR
 

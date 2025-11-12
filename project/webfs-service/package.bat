@@ -2,7 +2,7 @@
 set WEBFS_VERSION=1.0.0
 
 set CURRDIR=%CD%
-set JAVA_WS=java-ws
+set APP_NAME=webfs-service
 set WS_APP_PROPERTIES=.\config\application.properties
 set WS_SCRIPT_SH=.\scripts\start-webfs-service.sh
 set WS_SCRIPT_BAT=.\scripts\start-webfs-service.bat
@@ -11,9 +11,9 @@ set WS_WAR_NAME=webfs-service.war
 
 set CONFIG_DIR=config
 set OUTPUT_ROOT=..\..\output
-set WS_OUTPUT_DIR=%OUTPUT_ROOT%\%JAVA_WS%
-set WS_PACKAGE_NAME=%JAVA_WS%.%WEBFS_VERSION%
-set WS_PACKAGE_NAME_ZIP=%JAVA_WS%.%WEBFS_VERSION%.zip
+set WS_OUTPUT_DIR=%OUTPUT_ROOT%\%APP_NAME%
+set WS_PACKAGE_NAME=%APP_NAME%-%WEBFS_VERSION%
+set WS_PACKAGE_NAME_ZIP=%APP_NAME%-%WEBFS_VERSION%.zip
 
 powershell mkdir -ErrorAction SilentlyContinue %WS_OUTPUT_DIR%
 
