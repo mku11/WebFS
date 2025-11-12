@@ -85,10 +85,6 @@ public class FileSystem {
     public File write(String path, MultipartFile file, long position) throws IOException {
         File rFile = getFile(path);
         if (!rFile.exists()) {
-            File dir = new File(rFile.getParent());
-            validateFile(dir);
-            String originalFilename = validateFilePath(file.getOriginalFilename());
-            rFile = new File(dir, originalFilename);
             rFile.createNewFile();
         }
         InputStream inputStream = file.getInputStream();
