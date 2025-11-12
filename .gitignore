@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+output
+build
+*.p12
+
+.gradle
+
+**/.idea/workspace.xml 
+**/.idea/jarRepositories.xml
+**/.idea/uiDesigner.xml
+**/.idea/description.xml
+**/.idea/vcs.xml
+**/.idea/tasks.xml
+**/.idea/compiler.xml
+**/.idea/androidTestResultsUserPreferences.xml
+
+gradle-wrapper*
+.gradle
