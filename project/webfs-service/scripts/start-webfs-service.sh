@@ -1,1 +1,2 @@
+#!/bin/bash -x
 java -cp webfs-service.war org.springframework.boot.loader.WarLauncher

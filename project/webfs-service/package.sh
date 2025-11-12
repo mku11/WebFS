@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 WEBFS_VERSION=1.0.0
 
 CURRDIR=$(pwd)
@@ -10,7 +10,7 @@ WS_WAR=./build/libs/webfs-service-WEBFS_VERSION.war
 WS_WAR_NAME=webfs-service.war
 
 CONFIG_DIR=config
-OUTPUT_ROOT=../../../../output
+OUTPUT_ROOT=../../output
 WS_OUTPUT_DIR=$OUTPUT_ROOT/$JAVA_WS
 WS_PACKAGE_NAME=$JAVA_WS.WEBFS_VERSION
 WS_PACKAGE_NAME_ZIP=$JAVA_WS.WEBFS_VERSION.zip
