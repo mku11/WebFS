@@ -53,7 +53,7 @@ public class WebFSTests {
     // use this test case for exploratory testing with CURL see RealFileController for examples
     @Test
     public void testStartServer() throws Exception {
-//        Thread.sleep(6000000);
+        Thread.sleep(6000000);
     }
 
     @Test
@@ -180,10 +180,11 @@ public class WebFSTests {
         assertTrue(remoteDir.isDirectory());
 
         // upload
-        String remoteFilePath = rDirPath + "/" + file.getName();
+        String newFilename = "test2.dat";
+        String remoteFilePath = rDirPath + "/" + newFilename;
         JSONObject res = WebFSTestHelper.uploadFile(file.getPath(), remoteFilePath, 0);
         long time = System.currentTimeMillis();
-        File remoteFile = new File(remoteDir, file.getName());
+        File remoteFile = new File(remoteDir, newFilename);
         assertTrue(remoteFile.exists());
         assertEquals(remoteFile.length(), data.length);
         assertArrayEquals(WebFSTestHelper.getChecksumStream(new FileInputStream(remoteFile)),
@@ -191,7 +192,7 @@ public class WebFSTests {
         assertTrue(res.getBoolean("present"));
         assertTrue(res.getBoolean("file"));
         assertFalse(res.getBoolean("directory"));
-        assertEquals(res.getString("name"), file.getName());
+        assertEquals(res.getString("name"), newFilename);
         assertEquals(res.getString("path"), remoteFilePath);
         assertTrue(Math.abs(res.getLong("lastModified") - time) < 3000);
 
@@ -200,7 +201,7 @@ public class WebFSTests {
         assertTrue(res.getBoolean("present"));
         assertTrue(res.getBoolean("file"));
         assertFalse(res.getBoolean("directory"));
-        assertEquals(res.getString("name"), file.getName());
+        assertEquals(res.getString("name"), newFilename);
         assertEquals(res.getString("path"), remoteFilePath);
         assertEquals(res.getLong("length"), file.length());
 
