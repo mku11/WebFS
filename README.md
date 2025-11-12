@@ -20,11 +20,12 @@ For testing purposes you might want to disable the SSL configuration
 The primary user and password is provided in the config file but you can change it. 
 If you want to add more users use AuthUsers.add()  
 
+### API:
+Project [**SimpleFS**](https://github.com/mku11/SimpleFS) provides a complete and compatible API for WebFS for:  
+Java, C#, Python, JavaScript, and TypeScript.  
+
 ### Examples:
 The following examples are provided with CURL.  
-Project [**SimpleFS**](https://github.com/mku11/SimpleFS) provides a complete API for Java, C#, Python, JavaScript, and TypeScript.  
-
-
 If you're testing and don't use SSL then use http://localhost/8080/api...  
 Also if you're testing and use a self-signed certificate then add curl option -k  
 
@@ -35,52 +36,52 @@ curl -X GET "https://localhost:8443/api/info?path=/dir1/file.dat" -u user:passwo
 
 List files and directories under a directory  
 ```
-curl -X GET "https://localhost:8443/api/list?path=/dir1/dir2"
+curl -X GET "https://localhost:8443/api/list?path=/dir1/dir2" -u user:password
 ```
 
 Create a directory  
 ```
-curl -X POST "https://localhost:8443/api/mkdir?path=/dir/newdir"
+curl -X POST "https://localhost:8443/api/mkdir?path=/dir/newdir" -u user:password
 ```
 
 Create a file  
 ```
-curl -X POST "https://localhost:8443/api/mkdir?path=/dir/file.dat"
+curl -X POST "https://localhost:8443/api/mkdir?path=/dir/file.dat" -u user:password
 ```
 
 Upload a file  
 ```
-curl -X POST -F "file=@D:/tmp/testdata/data.dat" "https://localhost:8443/api/upload?path=/dir/file.dat&position=0"
+curl -X POST -F "file=@D:/tmp/testdata/data.dat" "https://localhost:8443/api/upload?path=/dir/file.dat&position=0" -u user:password
 ```    
     
 Get/Download a file  
 ```
-curl -X GET "https://localhost:8443/api/get?path=/dir/file.dat"
+curl -X GET "https://localhost:8443/api/get?path=/dir/file.dat" -u user:password
 ```
         
 Copy a file to the destination directory  
 ```
-curl -X PUT "https://localhost:8443/api/copy?sourcePath=/dir1/file.dat&destDir=/dir2&filename=newfile.dat"
+curl -X PUT "https://localhost:8443/api/copy?sourcePath=/dir1/file.dat&destDir=/dir2&filename=newfile.dat" -u user:password
 ```
     
 Move a file to the destination directory  
 ```
-curl -X PUT "https://localhost:8443/api/move?sourcePath=/dir1/file.dat&destDir=/dir2&filename=newfile.dat"
+curl -X PUT "https://localhost:8443/api/move?sourcePath=/dir1/file.dat&destDir=/dir2&filename=newfile.dat" -u user:password
 ```
    
 Rename a file or directory    
 ```
-curl -X PUT "https://localhost:8443/api/rename?path=/dir/file.dat&filename=newfile.dat"
+curl -X PUT "https://localhost:8443/api/rename?path=/dir/file.dat&filename=newfile.dat" -u user:password
 ```
 
 Delete a file or directory  
 ```
-curl -X DELETE "https://localhost:8443/api/delete?path=/dir/file.dat"
+curl -X DELETE "https://localhost:8443/api/delete?path=/dir/file.dat" -u user:password
 ```
     
 Set the file length  
 ```
-curl -X PUT "https://localhost:8443/api/rename?path=/dir/file.dat&length=1204"
+curl -X PUT "https://localhost:8443/api/rename?path=/dir/file.dat&length=1204" -u user:password
 ```
 
 
