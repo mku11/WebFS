@@ -21,7 +21,10 @@ The primary user and password is provided in the config file but you can change 
 If you want to add more users use AuthUsers.add()  
 
 ### Examples:
-The following examples are provided with curl.  
+The following examples are provided with CURL.  
+Project [**SimpleFS**](https://github.com/mku11/SimpleFS) provides a complete API for Java, C#, Python, JavaScript, and TypeScript.  
+
+
 If you're testing and don't use SSL then use http://localhost/8080/api...  
 Also if you're testing and use a self-signed certificate then add curl option -k  
 
