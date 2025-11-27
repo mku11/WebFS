@@ -7,7 +7,7 @@ Build:
 To build the app you will need gradle
 
 You can build from the command line:
-gradlew.bat build
+gradlew.bat bootWar
 
 To package:
 run package.sh in a shell

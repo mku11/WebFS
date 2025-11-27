@@ -11,7 +11,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -27,7 +26,6 @@ output
 build
 *.p12
 
-.gradle
 
 **/.idea/workspace.xml 
 **/.idea/jarRepositories.xml
@@ -38,5 +36,4 @@ build
 **/.idea/compiler.xml
 **/.idea/androidTestResultsUserPreferences.xml
 
-gradle-wrapper*
 .gradle
