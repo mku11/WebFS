@@ -158,7 +158,7 @@ public class FileController {
         Security.checkWrite(request);
 		path = FileSystem.getInstance().validateFilePath(path);
         System.out.println("UPLOAD, path: " + path + ", position: " + position + ", size: " + file.getSize());
-        File rFile = FileSystem.getInstance().write(path, file, position);
+        File rFile = FileSystem.getInstance().write(file, path, position);
         return new ResponseEntity<>(new FileResponse(rFile), position > 0 ? HttpStatus.PARTIAL_CONTENT : HttpStatus.OK);
     }
 
@@ -218,9 +218,9 @@ public class FileController {
             throw new IOException("Cannot copy directories, use createDirectory and copy recursively");
         } else {
             filename = filename == null ? source.getName() : filename;
-            nFile = new File(destDir, filename);
+            nFile = new File(dest, filename);
             FileInputStream stream = new FileInputStream(source);
-            FileSystem.getInstance().write(nFile, stream, 0);
+            FileSystem.getInstance().write(stream, nFile, 0);
 		}
         return new FileResponse(nFile);
     }
@@ -256,7 +256,7 @@ public class FileController {
             throw new IOException("Cannot move directories, use createDirectory and move recursively");
         } else {
 			filename = filename == null ? source.getName() : filename;
-            nFile = new File(destDir, filename);
+            nFile = new File(dest, filename);
             source.renameTo(nFile);
 		}
         return new FileResponse(nFile);

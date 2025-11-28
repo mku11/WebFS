@@ -26,26 +26,24 @@ SOFTWARE.
 import org.springframework.web.multipart.MultipartFile;
 import org.apache.commons.text.StringEscapeUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Utility for file system operations
  */
 public class FileSystem {
     private static final int BUFF_LENGTH = 32768;
-	private static final Pattern pattern = Pattern.compile("^.+[\\:\\*\\?\\<\\>\\|]+$");
+    private static final Pattern pattern = Pattern.compile("^.+[\\:\\*\\?\\<\\>\\|]+$");
     private String path;
 
     private static FileSystem instance;
 
     public static FileSystem getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new FileSystem();
         return instance;
     }
@@ -61,7 +59,7 @@ public class FileSystem {
     }
 
     public File getFile(String path) {
-		path = validateFilePath(path);
+        path = validateFilePath(path);
         String[] parts = path.split("/");
         File file = getRoot();
         for (String part : parts) {
@@ -70,10 +68,10 @@ public class FileSystem {
             if (part.equals(".."))
                 throw new RuntimeException("Backwards traversing (..) is not supported");
             file = new File(file, part);
-			if(file == null)
-				return null;
+            if (file == null)
+                return null;
         }
-		validateFile(file);
+        validateFile(file);
         return file;
     }
 
@@ -82,54 +80,62 @@ public class FileSystem {
                 new File(path).getPath(), "").replace("\\", "/");
     }
 
-    public File write(String path, MultipartFile file, long position) throws IOException {
-        File rFile = getFile(path);
-        if (!rFile.exists()) {
-            rFile.createNewFile();
+    public File write(MultipartFile srcFle, String destPath, long destOffset) throws IOException {
+        File destFile = getFile(destPath);
+        if (!destFile.exists()) {
+            destFile.createNewFile();
         }
-        InputStream inputStream = file.getInputStream();
-        return write(rFile, inputStream, position);
+        InputStream inputStream = srcFle.getInputStream();
+        return write(inputStream, destFile, destOffset);
     }
 
-    public File write(File rFile, InputStream inputStream, long position) throws IOException {
-        FileOutputStream outputStream = null;
+    public File write(InputStream inputStream, File destFile, long destOffset) throws IOException {
+        RandomAccessFile raf = null;
+        FileChannel fileChannel = null;
         try {
-            inputStream.skip(position);
-            outputStream = new FileOutputStream(rFile);
+            raf = new RandomAccessFile(destFile.getPath(), "rw");
+            fileChannel = raf.getChannel();
+            fileChannel.position(destOffset);
 
             byte[] buff = new byte[BUFF_LENGTH];
             int bytesRead;
             while ((bytesRead = inputStream.read(buff, 0, buff.length)) > 0) {
-                outputStream.write(buff, 0, bytesRead);
+                ByteBuffer buf = ByteBuffer.allocate(bytesRead);
+                buf.put(buff, 0, bytesRead);
+                buf.rewind();
+                fileChannel.write(buf);
             }
         } catch (Exception ex) {
             throw ex;
         } finally {
             if (inputStream != null)
                 inputStream.close();
-            if (outputStream != null)
-                outputStream.close();
+            if (fileChannel != null)
+                fileChannel.close();
+            if (raf != null)
+                raf.close();
+
         }
-        return rFile;
+        return destFile;
     }
-	
-	public String validateFilePath(String path) {
-		path = StringEscapeUtils.escapeHtml4(path);
-		Matcher matcher = pattern.matcher(path);
-		if(matcher.matches()){
-			throw new RuntimeException("Invalid characters in file path found");
-		}
-		return path;
-	}
-	
-	public void validateFile(File file) {
-		try {
-			java.io.File f = new java.io.File(file.getPath());
-			java.io.File r = new java.io.File(getRoot().getPath());
-			if(!f.getCanonicalPath().startsWith(r.getCanonicalPath()))
-				throw new RuntimeException("Could not validate file path");
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
+
+    public String validateFilePath(String path) {
+        path = StringEscapeUtils.escapeHtml4(path);
+        Matcher matcher = pattern.matcher(path);
+        if (matcher.matches()) {
+            throw new RuntimeException("Invalid characters in file path found");
+        }
+        return path;
+    }
+
+    public void validateFile(File file) {
+        try {
+            java.io.File f = new java.io.File(file.getPath());
+            java.io.File r = new java.io.File(getRoot().getPath());
+            if (!f.getCanonicalPath().startsWith(r.getCanonicalPath()))
+                throw new RuntimeException("Could not validate file path");
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }
