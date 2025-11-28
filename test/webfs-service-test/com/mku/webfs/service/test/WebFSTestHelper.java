@@ -41,7 +41,7 @@ import java.util.Random;
 public class WebFSTestHelper {
     //    public static String HOST = "http://localhost:8080";
     public static String HOST = "https://localhost:8443";
-    public static String TEST_OUTPUT_DIR = "C:\\tmp\\salmon\\test\\ws";
+    public static String TEST_OUTPUT_DIR = "D:\\tmp\\webfs\\test\\output";
     private static String user = "user";
     private static String password = "password";
     public static String role = "READ_WRITE";
