@@ -48,8 +48,8 @@ public class FileSystem {
         return instance;
     }
 
-
     public void setPath(String path) {
+        System.out.println("Root path: " + path);
         this.path = path;
     }
 
