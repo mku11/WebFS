@@ -27,10 +27,13 @@ import com.mku.webfs.service.controller.FileSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -49,6 +52,9 @@ public class Security {
 
     @Value("${app.path}")
     private String path;
+
+    @Value("${app.cors.allowed-origins}")
+    private String allowedOrigins;
 
     private AuthEntryPoint authenticationEntryPoint;
 
@@ -69,8 +75,9 @@ public class Security {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        System.out.println("CORS origins: " + allowedOrigins);
+        http.cors();
         http.csrf().disable();
-
         http.authorizeRequests()
                 .antMatchers("/**")
                 .authenticated()
@@ -98,16 +105,6 @@ public class Security {
                     .withUser(user.getName())
                     .password(new BCryptPasswordEncoder().encode(user.getPassword()))
                     .roles(user.getRole());
-        }
-    }
-
-    @EnableWebSecurity
-    public class WebSecurityConfig {
-
-        @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            http.cors(Customizer.withDefaults()); // allow OPTIONS method for browser preflight
-            return http.build();
         }
     }
 }
