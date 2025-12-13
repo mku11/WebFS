@@ -4,7 +4,7 @@ Allows most common operations like create, list, upload, and download files with
 WebFS is released under MIT License.  
 
 [![License: MIT](https://img.shields.io/github/license/mku11/WebFS.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/mku11/WebFS/releases)
+[![Version](https://img.shields.io/badge/version-1.0.1-blue)](https://github.com/mku11/WebFS/releases)
 [![GitHub Releases](https://img.shields.io/github/downloads/mku11/WebFS/latest/total?logo=github)](https://github.com/mku11/WebFS/releases)
 
 ### Features

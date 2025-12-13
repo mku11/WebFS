@@ -1,5 +1,5 @@
 @ECHO ON
-set WEBFS_VERSION=1.0.0
+set WEBFS_VERSION=1.0.1
 
 set CURRDIR=%CD%
 set APP_NAME=webfs-service

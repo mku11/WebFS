@@ -1,5 +1,5 @@
 WebFS Service
-version: 1.0.0
+version: 1.0.1
 project: https://github.com/mku11/WebFS
 license: MIT License https://github.com/mku11/WebFS/blob/main/LICENSE
   

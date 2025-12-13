@@ -1,5 +1,5 @@
 #!/bin/bash -x
-WEBFS_VERSION=1.0.0
+WEBFS_VERSION=1.0.1
 
 CURRDIR=$(pwd)
 APP_NAME=webfs-service
