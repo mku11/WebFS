@@ -26,10 +26,7 @@ jobs:
         os: [windows-latest]
     name: build.webfs.${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    permissions:
-      contents: read 
     steps:
-    
     
     # Git
     - name: Checkout sources
@@ -57,9 +54,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     
-    # Gradle Build Java Common Libs
+    # Gradle Build Java Service
     - if: runner.os == 'Windows'
-      name: Build Java Common Libs
+      name: Build Java Service
       shell: cmd
       run: cd ./project && gradlew.bat bootWar -x test -i
       
