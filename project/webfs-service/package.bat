@@ -12,7 +12,7 @@ set WS_WAR_NAME=webfs-service.war
 set CONFIG_DIR=config
 set OUTPUT_ROOT=..\..\output
 set WS_OUTPUT_DIR=%OUTPUT_ROOT%\%APP_NAME%
-set WS_PACKAGE_NAME=%APP_NAME%-%WEBFS_VERSION%
+set WS_PACKAGE_NAME=%APP_NAME%
 set WS_PACKAGE_NAME_ZIP=%APP_NAME%-%WEBFS_VERSION%.zip
 
 powershell mkdir -ErrorAction SilentlyContinue %WS_OUTPUT_DIR%
